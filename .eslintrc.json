@@ -2,6 +2,7 @@
   "extends": ["next/core-web-vitals", "next/typescript"],
   "rules": {
     "react/no-unused-prop-types": "off",
-    "no-unused-vars": "off"
+    "no-unused-vars": "off",
+    "no-undefined": "off"
   }
 }
