@@ -25,8 +25,8 @@ const Header = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="w-full max-w-xl md:max-w-4xl lg:max-w-6xl">
-      <div className="flex items-center justify-between py-4 mx-auto px-2 sm:px-6 lg:px-8 h-full">
+    <header className="w-full max-w-xl md:max-w-4xl lg:max-w-6xl z-50">
+      <div className="flex items-center justify-between py-4 mx-auto z-50 px-2 sm:px-6 lg:px-8 h-full">
         {user !== null && user !== undefined ? (
           <div className="relative">
             <div

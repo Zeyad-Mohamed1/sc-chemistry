@@ -23,7 +23,7 @@ const Hero = ({ user }: any) => {
   }, [user, dispatch, rest]);
 
   return (
-    <div className="w-full min-h-screen mx-auto">
+    <div className="w-full min-h-screen mx-auto z-0">
       <Image
         src={"/pattern.png"}
         fill
@@ -33,7 +33,7 @@ const Hero = ({ user }: any) => {
         priority
       />
 
-      <div className="absolute top-1/2 left-0 right-0 transform -translate-y-1/2 w-full flex flex-col-reverse md:flex-row items-center justify-center">
+      <div className="w-full flex flex-col-reverse md:flex-row items-center justify-center">
         <div className="flex-1 w-full text-right">
           <div className="flex w-full flex-col gap-5 items-center">
             <div className="font-extrabold text-5xl lg:text-6xl flex items-center flex-row-reverse gap-2">
@@ -69,7 +69,7 @@ const Hero = ({ user }: any) => {
             src={"/hero.png"}
             width={450}
             height={450}
-            className="object-contain max-sm:h-[30rem] floating-image"
+            className="object-contain max-sm:h-[30rem] floating-image z-0"
             alt="Mountains and forests with two cabins"
             priority
           />
