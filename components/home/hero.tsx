@@ -3,9 +3,9 @@ import { CustomButton } from "../shared/custom-button";
 import Link from "next/link";
 import { DropdownMenuYears } from "../shared/drop-down-menu";
 
-const Hero = () => {
+const Hero = async () => {
   return (
-    <div className="w-full relative min-h-screen mx-auto">
+    <div className="w-full min-h-screen mx-auto">
       <Image
         src={"/pattern.png"}
         fill
@@ -15,32 +15,19 @@ const Hero = () => {
         priority
       />
 
-      <div className="absolute top-1/2 left-0 right-0 transform -translate-y-1/2 w-full flex flex-col md:flex-row items-center justify-center">
-        <div className="flex-1 flex items-center justify-center">
-          <Image
-            src={"/hero.png"}
-            width={450}
-            height={450}
-            className="object-contain max-sm:h-[30rem] floating-image"
-            alt="Mountains and forests with two cabins"
-            priority
-          />
-        </div>
-
+      <div className="absolute top-1/2 left-0 right-0 transform -translate-y-1/2 w-full flex flex-col-reverse md:flex-row items-center justify-center">
         <div className="flex-1 w-full text-right">
           <div className="flex w-full flex-col gap-5 items-center">
             <div className="font-extrabold text-5xl lg:text-6xl flex items-center flex-row-reverse gap-2">
-              <p className="text-muted">. أ</p>
               <p className="text-primary text">سلوي عبد العزيز</p>
+              <p className="text-muted"> أ .</p>
             </div>
 
             <h3 className="md:text-2xl text-xl font-bold my-4">
-              !اكتشف سحر الكيمياء و اطلق طاقتك معنا
+              اكتشف سحر الكيمياء و اطلق طاقتك معنا!
             </h3>
 
             <div className="flex items-center gap-5">
-              <DropdownMenuYears />
-
               <Link href={"/sign-in"}>
                 <CustomButton className="rounded-full text-white bg-secondary">
                   <div className="absolute right-[-10px] top-[-8px] max-sm:right-[-25px]">
@@ -52,11 +39,22 @@ const Hero = () => {
                       className=""
                     />
                   </div>
-                  <p className="mr-3">...سجل معنا</p>
+                  <p className="mr-3">سجل معنا...</p>
                 </CustomButton>
               </Link>
+              <DropdownMenuYears />
             </div>
           </div>
+        </div>
+        <div className="flex-1 flex items-center justify-center">
+          <Image
+            src={"/hero.png"}
+            width={450}
+            height={450}
+            className="object-contain max-sm:h-[30rem] floating-image"
+            alt="Mountains and forests with two cabins"
+            priority
+          />
         </div>
       </div>
     </div>

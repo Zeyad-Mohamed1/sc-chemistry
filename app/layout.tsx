@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/shared/theme-provider";
 import Header from "@/components/shared/header";
+import StoreProvider from "@/components/shared/store-provider";
 
 const tajawal = localFont({
   src: "./fonts/Questv1 Regular.ttf",
@@ -20,21 +21,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ar">
+    <html lang="ar" dir="rtl">
       <body
         className={`${tajawal.className} antialiased max-w-xl md:max-w-4xl lg:max-w-6xl mx-auto `}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Header />
-          <main className="min-h-screen px-2 sm:px-6 lg:px-8 mx-auto w-full max-w-xl md:max-w-4xl lg:max-w-6xl">
-            {children}
-          </main>
-        </ThemeProvider>
+        <StoreProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Header />
+            <main className="min-h-screen px-2 sm:px-6 lg:px-8 mx-auto w-full max-w-xl md:max-w-4xl lg:max-w-6xl">
+              {children}
+            </main>
+          </ThemeProvider>
+        </StoreProvider>
       </body>
     </html>
   );
