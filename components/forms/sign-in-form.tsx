@@ -33,7 +33,7 @@ const formSchema = z.object({
 
 const SignInForm = () => {
   const { formState } = useForm();
-  const { push } = useRouter();
+  const { push, refresh } = useRouter();
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -53,6 +53,7 @@ const SignInForm = () => {
         title: res.message,
       });
     } else {
+      refresh();
       Swal.fire({
         position: "center",
         icon: "success",

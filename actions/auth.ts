@@ -1,6 +1,7 @@
 "use server";
 import { createServerAxiosInstance } from "@/utils/request";
 import { LoginUserDto, RegisterUserDto } from "@/utils/types";
+import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
 export const registerUser = async (user: RegisterUserDto) => {
@@ -29,6 +30,8 @@ export const loginUser = async (user: LoginUserDto) => {
       name: "token",
       value: res.data.token,
     });
+
+    revalidateTag("user");
 
     return res.data;
   } catch (error) {

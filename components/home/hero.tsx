@@ -1,9 +1,27 @@
+"use client";
 import Image from "next/image";
 import { CustomButton } from "../shared/custom-button";
 import Link from "next/link";
 import { DropdownMenuYears } from "../shared/drop-down-menu";
+import { useEffect } from "react";
+import { setUser } from "@/lib/slices/userSlice";
+import { useDispatch } from "react-redux";
 
-const Hero = async () => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const Hero = ({ user }: any) => {
+  const dispatch = useDispatch();
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { isAdmin, ...rest } = user || {};
+
+  useEffect(() => {
+    if (user === null) {
+      dispatch(setUser(null));
+    } else {
+      dispatch(setUser(rest));
+    }
+  }, [user, dispatch, rest]);
+
   return (
     <div className="w-full min-h-screen mx-auto">
       <Image

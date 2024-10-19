@@ -2,11 +2,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
-import { useQuery } from "@tanstack/react-query";
-import { getUser } from "@/actions/user";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { setUser } from "../../lib/slices/userSlice";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import { House, LogOut, PackageOpen, UserRoundCog } from "lucide-react";
 
 const menu = [
@@ -22,24 +19,15 @@ const menu = [
   },
 ];
 const Header = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { user } = useSelector((state: any) => state.user);
+
   const [open, setOpen] = useState(false);
-  const dispatch = useDispatch();
-  const { data } = useQuery({
-    queryKey: ["user"],
-    queryFn: async () => await getUser(),
-  });
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { isAdmin, ...rest } = data || {};
-
-  useEffect(() => {
-    dispatch(setUser(rest));
-  }, [data, dispatch, rest]);
 
   return (
     <header className="w-full max-w-xl md:max-w-4xl lg:max-w-6xl">
       <div className="flex items-center justify-between py-4 mx-auto px-2 sm:px-6 lg:px-8 h-full">
-        {data ? (
+        {user !== null && user !== undefined ? (
           <div className="relative">
             <div
               onClick={() => setOpen(!open)}
@@ -49,7 +37,7 @@ const Header = () => {
                 <UserRoundCog className="size-4 text-white" />
               </div>
               <p className="font-medium text-base text-gray-700">
-                مرحبا {data?.firstName}
+                مرحبا {user?.firstName}
               </p>
             </div>
 
