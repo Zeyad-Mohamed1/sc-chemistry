@@ -22,7 +22,7 @@ import {
   SelectValue,
 } from "../ui/select";
 import { governorates, years } from "@/utils/constants";
-import { registerUser } from "@/actions/auth";
+import { registerUser } from "@/actions/admin/auth";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 
@@ -88,8 +88,6 @@ const SignUpForm = () => {
     const { confirmPassword, ...rest } = values;
 
     const res = await registerUser(rest);
-
-    console.log(res);
 
     if ("error" in res) {
       return;

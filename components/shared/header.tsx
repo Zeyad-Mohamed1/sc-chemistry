@@ -4,7 +4,8 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { House, LogOut, PackageOpen, UserRoundCog } from "lucide-react";
+import { House, LogOut, PackageOpen, Shield, UserRoundCog } from "lucide-react";
+import { logoutUser } from "@/actions/admin/auth";
 
 const menu = [
   {
@@ -18,14 +19,32 @@ const menu = [
     icon: <PackageOpen />,
   },
 ];
-const Header = () => {
+
+const adminMenu = [
+  {
+    name: "الصفحة الرئيسية",
+    href: "/",
+    icon: <House />,
+  },
+  {
+    name: "لوحة التحكم",
+    href: "/dashboard",
+    icon: <Shield />,
+  },
+];
+const Header = ({ isAdmin }: { isAdmin: boolean }) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { user } = useSelector((state: any) => state.user);
 
   const [open, setOpen] = useState(false);
 
+  const logout = async () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const res = await logoutUser();
+  };
+
   return (
-    <header className="w-full max-w-xl md:max-w-4xl lg:max-w-6xl z-50">
+    <header className="w-full max-w-xl md:max-w-4xl lg:max-w-6xl mx-auto z-50 sticky top-0 bg-white">
       <div className="flex items-center justify-between py-4 mx-auto z-50 px-2 sm:px-6 lg:px-8 h-full">
         {user !== null && user !== undefined ? (
           <div className="relative">
@@ -43,27 +62,44 @@ const Header = () => {
 
             {open && (
               <div
-                className="absolute end-auto z-10 mt-2 w-[170px] rounded-[6px] border border-gray-100 bg-white shadow-lg"
+                onClick={() => setOpen(!open)}
+                className="absolute end-auto z-[999] mt-2 w-[170px] rounded-[6px] border border-gray-100 bg-white shadow-lg"
                 role="menu"
               >
                 <div className="p-3">
-                  {menu.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      className="block rounded-[6px] py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700 px-1"
-                      role="menuitem"
-                    >
-                      <div className="flex items-center gap-2">
-                        <div className="flex items-center justify-center w-8 h-8 rounded-full p-2 bg-muted">
-                          {item.icon}
-                        </div>
-                        <span>{item.name}</span>
-                      </div>
-                    </Link>
-                  ))}
+                  {isAdmin
+                    ? adminMenu.map((item) => (
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          className="block rounded-[6px] py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700 px-1"
+                          role="menuitem"
+                        >
+                          <div className="flex items-center gap-2">
+                            <div className="flex items-center justify-center w-8 h-8 rounded-full p-2 bg-muted">
+                              {item.icon}
+                            </div>
+                            <span>{item.name}</span>
+                          </div>
+                        </Link>
+                      ))
+                    : menu.map((item) => (
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          className="block rounded-[6px] py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700 px-1"
+                          role="menuitem"
+                        >
+                          <div className="flex items-center gap-2">
+                            <div className="flex items-center justify-center w-8 h-8 rounded-full p-2 bg-muted">
+                              {item.icon}
+                            </div>
+                            <span>{item.name}</span>
+                          </div>
+                        </Link>
+                      ))}
                   <div className="block cursor-pointer rounded-[6px] py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700 px-1">
-                    <div className="flex items-center gap-2">
+                    <div onClick={logout} className="flex items-center gap-2">
                       <div className="flex items-center justify-center w-8 h-8 rounded-full p-2 bg-muted">
                         <LogOut />
                       </div>

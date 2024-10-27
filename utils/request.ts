@@ -1,4 +1,4 @@
-import { cookies } from "next/headers";
+import { cookies, type UnsafeUnwrappedCookies } from "next/headers";
 import axios from "axios";
 export const createServerAxiosInstance = () => {
   return axios.create({
@@ -6,7 +6,7 @@ export const createServerAxiosInstance = () => {
     withCredentials: true,
     headers: {
       "Content-Type": "application/json",
-      Cookie: cookies().toString(),
+      Cookie: (cookies() as unknown as UnsafeUnwrappedCookies).toString(),
     },
   });
 };

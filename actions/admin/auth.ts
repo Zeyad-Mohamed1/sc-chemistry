@@ -20,13 +20,13 @@ export const loginUser = async (user: LoginUserDto) => {
       withCredentials: true,
     });
 
-    const cookie = cookies().get("token");
+    const cookie = (await cookies()).get("token");
 
     if (cookie) {
-      cookies().delete("token");
+      (await cookies()).delete("token");
     }
 
-    cookies().set({
+    (await cookies()).set({
       name: "token",
       value: res.data.token,
     });
@@ -37,5 +37,16 @@ export const loginUser = async (user: LoginUserDto) => {
   } catch (error) {
     // @ts-expect-error aaa
     return error?.response.data;
+  }
+};
+
+export const logoutUser = async () => {
+  try {
+    (await cookies()).delete("token");
+    revalidateTag("user");
+
+    return true;
+  } catch (error) {
+    return error;
   }
 };

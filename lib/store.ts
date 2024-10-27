@@ -36,7 +36,8 @@ const storage =
     : createNoopStorage();
 
 const persistConfig = {
-  key: "persist",
+  key: "root",
+  version: 1,
   storage,
 };
 
@@ -46,9 +47,7 @@ const rootReducer = combineReducers({
 
 const makeConfiguredStore = () =>
   configureStore({
-    reducer: {
-      rootReducer,
-    },
+    reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: {
@@ -66,6 +65,12 @@ export const makeStore = () => {
     // eslint-disable-next-line prefer-const, @typescript-eslint/no-explicit-any
     let store: any = configureStore({
       reducer: persistedReducer,
+      middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+          serializableCheck: {
+            ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+          },
+        }),
     });
     store.__persistor = persistStore(store);
     return store;

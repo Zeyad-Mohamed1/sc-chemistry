@@ -15,7 +15,7 @@ import {
 import Image from "next/image";
 import { Loader2, LockKeyhole, PhoneCall } from "lucide-react";
 
-import { loginUser } from "@/actions/auth";
+import { loginUser } from "@/actions/admin/auth";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 
@@ -63,6 +63,7 @@ const SignInForm = () => {
           push("/");
         },
       });
+      push("/");
     }
   }
 
