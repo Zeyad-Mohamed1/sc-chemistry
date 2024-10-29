@@ -8,6 +8,7 @@ import { getUser } from "@/actions/admin/user";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "@/app/api/uploadthing/core";
+import Footer from "@/components/shared/footer";
 
 const tajawal = localFont({
   src: "./fonts/Questv1 Regular.ttf",
@@ -45,7 +46,8 @@ export default async function RootLayout({
             disableTransitionOnChange
           >
             <Header isAdmin={!!user?.isAdmin} />
-            {children}
+            <main className="min-h-screen">{children}</main>
+            <Footer />
           </ThemeProvider>
         </StoreProvider>
       </body>

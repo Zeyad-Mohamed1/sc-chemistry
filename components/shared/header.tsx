@@ -44,8 +44,8 @@ const Header = ({ isAdmin }: { isAdmin: boolean }) => {
   };
 
   return (
-    <header className="w-full max-w-xl md:max-w-4xl lg:max-w-6xl mx-auto z-50 sticky top-0 bg-white">
-      <div className="flex items-center justify-between py-4 mx-auto z-50 px-2 sm:px-6 lg:px-8 h-full">
+    <header className="w-full z-[9999] sticky top-0 bg-white">
+      <div className="flex items-center justify-between py-4 mx-auto z-50 px-2 sm:px-6 lg:px-8 h-full max-w-xl md:max-w-4xl lg:max-w-6xl">
         {user !== null && user !== undefined ? (
           <div className="relative">
             <div

@@ -6,9 +6,15 @@ import { DropdownMenuYears } from "../shared/drop-down-menu";
 import { useEffect } from "react";
 import { setUser } from "@/lib/slices/userSlice";
 import { useDispatch } from "react-redux";
+import { motion } from "framer-motion";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Hero = ({ user }: any) => {
+  const MULTIDIRECTION_SLIDE_VARIANTS = {
+    hidden: { opacity: 0, x: "-25vw" },
+    visible: { opacity: 1, x: 0 },
+    right: { opacity: 0, x: "25vw" },
+  };
   const dispatch = useDispatch();
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -23,19 +29,26 @@ const Hero = ({ user }: any) => {
   }, [user, dispatch, rest]);
 
   return (
-    <div className="w-full min-h-screen mx-auto z-0">
+    <div className="w-full h-full mx-auto z-0 overflow-hidden px-2 sm:px-6 lg:px-8 mb-20">
       <Image
         src={"/pattern.png"}
         fill
         quality={80}
         className="object-cover -z-50"
-        alt="Mountains and forests with two cabins"
+        alt="hero image"
         priority
       />
 
-      <div className="w-full flex flex-col-reverse md:flex-row items-center justify-center">
-        <div className="flex-1 w-full text-right">
-          <div className="flex w-full flex-col gap-5 items-center">
+      <div className="w-full flex flex-col-reverse md:flex-row items-center justify-center  gap-2 md:gap-5 lg:gap-10">
+        <motion.div
+          initial="right"
+          animate="visible"
+          variants={MULTIDIRECTION_SLIDE_VARIANTS}
+          transition={{ duration: 1 }}
+
+          // className="flex-1 w-full text-right"
+        >
+          <div className="flex flex-1 w-full flex-col gap-5 items-center text-right">
             <div className="font-extrabold text-5xl lg:text-6xl flex items-center flex-row-reverse gap-2">
               <p className="text-primary text">سلوي عبد العزيز</p>
               <p className="text-muted"> أ .</p>
@@ -48,23 +61,20 @@ const Hero = ({ user }: any) => {
             <div className="flex items-center gap-5">
               <Link href={"/sign-in"}>
                 <CustomButton className="rounded-full text-white bg-secondary">
-                  <div className="absolute right-[-10px] top-[-8px] max-sm:right-[-25px]">
-                    <Image
-                      src={"/flask.png"}
-                      width={35}
-                      height={35}
-                      alt={"login"}
-                      className=""
-                    />
-                  </div>
-                  <p className="mr-3">سجل معنا...</p>
+                  <p>سجل معنا...</p>
                 </CustomButton>
               </Link>
               <DropdownMenuYears />
             </div>
           </div>
-        </div>
-        <div className="flex-1 flex items-center justify-center">
+        </motion.div>
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={MULTIDIRECTION_SLIDE_VARIANTS}
+          transition={{ duration: 1 }}
+          // className="flex-1 flex items-center justify-center"
+        >
           <Image
             src={"/hero.png"}
             width={450}
@@ -73,7 +83,7 @@ const Hero = ({ user }: any) => {
             alt="Mountains and forests with two cabins"
             priority
           />
-        </div>
+        </motion.div>
       </div>
     </div>
   );
