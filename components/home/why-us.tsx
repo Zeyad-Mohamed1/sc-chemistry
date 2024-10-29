@@ -26,16 +26,16 @@ const WhyUs = () => {
           </div>
 
           <div className="flex-1 flex flex-col gap-3 items-center justify-center w-full md:w-1/2">
-            <button className="button__loader w-[80%] md:w-1/2 xl:w-1/4">
+            <button className="button__loader w-[80%] md:w-1/2 xl:w-1/2">
               <span className="button__text font-bold text-lg">شرح</span>
             </button>
-            <button className="button__loader w-[80%] md:w-1/2 xl:w-1/4">
+            <button className="button__loader w-[80%] md:w-1/2 xl:w-1/2">
               <span className="button__text font-bold text-lg">تمارين</span>
             </button>
-            <button className="button__loader w-[80%] md:w-1/2 xl:w-1/4">
+            <button className="button__loader w-[80%] md:w-1/2 xl:w-1/2">
               <span className="button__text font-bold text-lg">مراجعات</span>
             </button>
-            <button className="button__loader w-[80%] md:w-1/2 xl:w-1/4">
+            <button className="button__loader w-[80%] md:w-1/2 xl:w-1/2">
               <span className="button__text font-bold text-lg">
                 تجهيز للامتحان
               </span>
