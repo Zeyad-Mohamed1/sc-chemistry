@@ -4,14 +4,16 @@ import * as React from "react";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import Link from "next/link";
-
-const years = [
-  "الصف الاول الثانوي",
-  "الصف الثاني الثانوي",
-  "الصف الثالث الثانوي",
-];
+import { useQuery } from "@tanstack/react-query";
+import { getYearsForUser } from "@/actions/user/year";
+import { Loader2 } from "lucide-react";
+import { Year } from "@/utils/types";
 
 export function DropdownMenuYears() {
+  const { data: years, isLoading } = useQuery({
+    queryKey: ["years"],
+    queryFn: async () => await getYearsForUser(),
+  });
   const [open, setOpen] = React.useState(false);
   return (
     <div className="relative">
@@ -36,16 +38,20 @@ export function DropdownMenuYears() {
           role="menu"
         >
           <div className="p-2">
-            {years.map((year) => (
-              <Link
-                href={`/years/${year}`}
-                key={year}
-                className="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                role="menuitem"
-              >
-                {year}
-              </Link>
-            ))}
+            {isLoading ? (
+              <Loader2 className="text-primary size-5 animate-spin" />
+            ) : (
+              years.map((year: Year) => (
+                <Link
+                  href={`/courses/${year.name}`}
+                  key={year.id}
+                  className="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                  role="menuitem"
+                >
+                  {year.name}
+                </Link>
+              ))
+            )}
           </div>
         </div>
       )}

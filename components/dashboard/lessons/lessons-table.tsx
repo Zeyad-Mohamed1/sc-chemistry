@@ -39,6 +39,7 @@ import EditLesson from "./edit-lesson";
 import { getAllLessons } from "@/actions/user/lesson";
 import { deleteLesson, updatePublishForLesson } from "@/actions/admin/lesson";
 import Files from "./files";
+import Videos from "./videos";
 
 export default function LessonsTable() {
   const { isLoading: isLoadingYears, data: years } = useQuery({
@@ -196,6 +197,7 @@ export default function LessonsTable() {
                   </TableHead>
                 ))}
                 <TableHead className="text-right">الملفات</TableHead>
+                <TableHead className="text-right">الفيديوهات</TableHead>
                 <TableHead className="text-right">الإجراءات</TableHead>
               </TableRow>
             </TableHeader>
@@ -215,6 +217,10 @@ export default function LessonsTable() {
                     </TableCell>
                     <TableCell>
                       <Files id={lesson?.id ?? ""} />
+                    </TableCell>
+
+                    <TableCell>
+                      <Videos id={lesson?.id ?? ""} />
                     </TableCell>
                     <TableCell className="flex items-center gap-2">
                       <EditLesson refetch={refetch} id={lesson.id ?? ""} />

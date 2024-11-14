@@ -1,11 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { House, LogOut, PackageOpen, Shield, UserRoundCog } from "lucide-react";
 import { logoutUser } from "@/actions/admin/auth";
+import { setUser } from "@/lib/slices/userSlice";
 
 const menu = [
   {
@@ -32,7 +34,7 @@ const adminMenu = [
     icon: <Shield />,
   },
 ];
-const Header = ({ isAdmin }: { isAdmin: boolean }) => {
+const Header = ({ cuurentUser }: { cuurentUser: any }) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { user } = useSelector((state: any) => state.user);
 
@@ -42,6 +44,19 @@ const Header = ({ isAdmin }: { isAdmin: boolean }) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const res = await logoutUser();
   };
+
+  const dispatch = useDispatch();
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { isAdmin: admin, ...rest } = cuurentUser || {};
+
+  useEffect(() => {
+    if (cuurentUser === null) {
+      dispatch(setUser(null));
+    } else {
+      dispatch(setUser(rest));
+    }
+  }, [cuurentUser, dispatch]);
 
   return (
     <header className="w-full z-[9999] sticky top-0 bg-white">
@@ -67,7 +82,7 @@ const Header = ({ isAdmin }: { isAdmin: boolean }) => {
                 role="menu"
               >
                 <div className="p-3">
-                  {isAdmin
+                  {cuurentUser?.isAdmin
                     ? adminMenu.map((item) => (
                         <Link
                           key={item.name}

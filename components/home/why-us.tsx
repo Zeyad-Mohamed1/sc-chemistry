@@ -21,7 +21,7 @@ const WhyUs = () => {
               width={300}
               height={300}
               alt="why-us"
-              className="h-auto sm:w-2/3 md:w-1/2"
+              className="h-auto sm:w-2/3 md:w-1/2 lg:max-w-[500px] "
             />
           </div>
 

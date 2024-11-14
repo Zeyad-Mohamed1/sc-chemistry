@@ -6,7 +6,9 @@ import { cookies } from "next/headers";
 
 export const registerUser = async (user: RegisterUserDto) => {
   try {
-    const res = await createServerAxiosInstance().post("/auth/register", user);
+    const res = await (
+      await createServerAxiosInstance()
+    ).post("/auth/register", user);
 
     return res.data;
   } catch (error) {
@@ -16,7 +18,9 @@ export const registerUser = async (user: RegisterUserDto) => {
 
 export const loginUser = async (user: LoginUserDto) => {
   try {
-    const res = await createServerAxiosInstance().post("/auth/login", user, {
+    const res = await (
+      await createServerAxiosInstance()
+    ).post("/auth/login", user, {
       withCredentials: true,
     });
 

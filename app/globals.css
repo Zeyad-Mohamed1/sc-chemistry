@@ -226,9 +226,6 @@
 }
 
 .courses {
-  text-align: center;
-  font-size: 50px;
-  font-weight: 900;
   /* margin: 40px; */
   text-shadow: 0 12px 2px #00f5f5;
 }
@@ -254,4 +251,115 @@
 .hover-shadow:not(.not-allowed):hover {
   box-shadow: 0 7px 10px 0 #0003;
   transform: scale(1.03);
+}
+
+.sh {
+  box-shadow: -5px 5px 20px #0006;
+}
+
+.image {
+  background-color: #000;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.about {
+  padding: 15px 15px 20px;
+  position: relative;
+  text-align: right;
+  width: 100%;
+}
+.p {
+  color: #6b7280;
+  font-size: 1.1rem;
+  letter-spacing: -0.5px;
+  margin-bottom: 1rem;
+}
+
+.price {
+  align-items: center;
+  background-color: #233a86;
+  border-radius: 0 0 10px 0;
+  box-shadow: 0 0 10px 2px rgba(6, 182, 212, 0.5);
+  color: #fff;
+  display: flex;
+  flex-direction: row-reverse;
+  left: 0;
+  padding: 15px 25px;
+  position: absolute;
+  top: 0;
+}
+
+.dates {
+  padding: 15px 0;
+  position: relative;
+}
+
+.dates::before {
+  background-color: #e6e6e6;
+  content: "";
+  height: 3px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.btns {
+  display: flex;
+  align-items: center;
+  padding: 20px 0 0;
+  position: relative;
+}
+
+.btns::before {
+  background-color: #e6e6e6;
+  content: "";
+  height: 3px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.flex-center-both {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg-gradient {
+  background: linear-gradient(90deg, #0000, currentColor, currentColor);
+}
+
+.glassy {
+  --box-border: #ffffff40;
+  --back-color: #a8858511;
+  -webkit-backdrop-filter: saturate(180%) blur(5px);
+  backdrop-filter: saturate(180%) blur(5px);
+  background-color: var(--back-color);
+  border-left: 1px solid var(--box-border);
+  border-top: 1px solid var(--box-border);
+}
+
+.shadow-large {
+  box-shadow: 0 0 20px #0006;
+}
+
+.shadow-small {
+  box-shadow: 0 0 5px #0002;
+}
+
+.clr-text-primary {
+  color: #111827;
+}
+
+.bg-secondary-container {
+  background-color: #d1d5db;
+}
+
+.clr-text-secondary {
+  color: #6b7280;
 }

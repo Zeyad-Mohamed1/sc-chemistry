@@ -34,7 +34,6 @@ export default function AddLesson() {
   const { push } = useRouter();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [video, setVideo] = useState("");
   const [imageUrl, setImageUrl] = useState<string>("");
   const [year, setYear] = useState("");
   const [courseId, setCourseId] = useState("");
@@ -55,20 +54,17 @@ export default function AddLesson() {
       courseId,
       name,
       description,
-      video,
       imageUrl,
     }: {
       courseId: string;
       name: string;
       description: string;
-      video: string;
       imageUrl: string;
     }) => {
       await createLesson({
         id: courseId,
         name,
         description,
-        video,
         image: imageUrl,
       });
     },
@@ -82,7 +78,6 @@ export default function AddLesson() {
       courseId,
       name,
       description,
-      video,
       imageUrl,
     });
     // Reset form fields after submission
@@ -101,7 +96,6 @@ export default function AddLesson() {
       push("/dashboard/lessons");
       setName("");
       setDescription("");
-      setVideo("");
       setImageUrl("");
     }
   }, [isSuccess, data, push]);
@@ -150,16 +144,7 @@ export default function AddLesson() {
               />
             )}
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="video">رابط الفيديو</Label>
-            <Input
-              id="video"
-              placeholder="يرجي ادخال رابط الفيديو"
-              value={video}
-              onChange={(e) => setVideo(e.target.value)}
-              required
-            />
-          </div>
+
           <div className="space-y-2">
             <Label htmlFor="description">العام الدراسي</Label>
             {isLoadingYears ? (

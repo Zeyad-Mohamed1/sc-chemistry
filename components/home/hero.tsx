@@ -3,30 +3,20 @@ import Image from "next/image";
 import { CustomButton } from "../shared/custom-button";
 import Link from "next/link";
 import { DropdownMenuYears } from "../shared/drop-down-menu";
-import { useEffect } from "react";
-import { setUser } from "@/lib/slices/userSlice";
-import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Hero = ({ user }: any) => {
+const Hero = () => {
   const MULTIDIRECTION_SLIDE_VARIANTS = {
     hidden: { opacity: 0, x: "-25vw" },
     visible: { opacity: 1, x: 0 },
     right: { opacity: 0, x: "25vw" },
   };
-  const dispatch = useDispatch();
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { isAdmin, ...rest } = user || {};
 
   useEffect(() => {
-    if (user === null) {
-      dispatch(setUser(null));
-    } else {
-      dispatch(setUser(rest));
-    }
-  }, [user, dispatch, rest]);
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="w-full h-full mx-auto z-0 overflow-hidden px-2 sm:px-6 lg:px-8 mb-20">

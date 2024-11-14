@@ -6,13 +6,11 @@ export const createLesson = async ({
   id,
   name,
   description,
-  video,
   image,
 }: {
   id: string;
   name: string;
   description: string;
-  video: string;
   image: string;
 }) => {
   const res = await fetch(
@@ -26,7 +24,6 @@ export const createLesson = async ({
       body: JSON.stringify({
         name,
         description,
-        video,
         image,
       }),
     }
@@ -44,13 +41,11 @@ export const updateLesson = async ({
   id,
   name,
   description,
-  video,
   image,
 }: {
   id: string;
   name: string;
   description: string;
-  video: string;
   image: string;
 }) => {
   const res = await fetch(
@@ -64,7 +59,6 @@ export const updateLesson = async ({
       body: JSON.stringify({
         name,
         description,
-        video,
         image,
       }),
     }
@@ -176,6 +170,82 @@ export const addPdf = async ({
 export const deletePdf = async (id: string) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/lesson/pdf/${id}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: (await cookies()).toString(),
+      },
+    }
+  );
+
+  if (!res.ok) {
+    return JSON.parse(await res.text());
+  }
+
+  const data = await res.json();
+
+  return data;
+};
+
+export const addVideo = async ({
+  id,
+  name,
+  url,
+  description,
+}: {
+  id: string;
+  name: string;
+  url: string;
+  description: string;
+}) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/${id}/videos`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: (await cookies()).toString(),
+      },
+      body: JSON.stringify({
+        name,
+        url,
+        description,
+      }),
+    }
+  );
+
+  if (!res.ok) {
+    return JSON.parse(await res.text());
+  }
+
+  const createdVideo = await res.json();
+  return createdVideo;
+};
+
+export const getVideos = async (id: string) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/${id}/videos`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: (await cookies()).toString(),
+      },
+    }
+  );
+
+  if (!res.ok) {
+    return JSON.parse(await res.text());
+  }
+
+  const videos = await res.json();
+  return videos;
+};
+
+export const deleteVideo = async (id: string) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/videos/${id}`,
     {
       method: "DELETE",
       headers: {

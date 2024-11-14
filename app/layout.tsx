@@ -45,7 +45,7 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <Header isAdmin={!!user?.isAdmin} />
+            <Header cuurentUser={user} />
             <main className="min-h-screen">{children}</main>
             <Footer />
           </ThemeProvider>

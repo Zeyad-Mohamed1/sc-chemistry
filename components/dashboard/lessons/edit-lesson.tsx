@@ -29,7 +29,6 @@ const EditLesson = ({ id, refetch }: { id: string; refetch: () => void }) => {
 
   const [name, setName] = useState(data?.name || "");
   const [description, setDescription] = useState(data?.description || "");
-  const [video, setVideo] = useState(data?.video || "");
   const [imageUrl, setImageUrl] = useState<string>(data?.image || "");
 
   const {
@@ -44,7 +43,6 @@ const EditLesson = ({ id, refetch }: { id: string; refetch: () => void }) => {
         id,
         name,
         description,
-        video,
         image: imageUrl,
       }),
   });
@@ -70,7 +68,6 @@ const EditLesson = ({ id, refetch }: { id: string; refetch: () => void }) => {
     setName(data?.name || "");
     setDescription(data?.description || "");
     setImageUrl(data?.image || "");
-    setVideo(data?.video || "");
   }, [data]);
 
   return (
@@ -131,16 +128,6 @@ const EditLesson = ({ id, refetch }: { id: string; refetch: () => void }) => {
                 onUploadError={(error: Error) => {
                   console.log(error);
                 }}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="video">رابط الفيديو</Label>
-              <Input
-                id="video"
-                placeholder="رابط الفيديو"
-                defaultValue={video}
-                onChange={(e) => setVideo(e.target.value)}
-                required
               />
             </div>
           </>

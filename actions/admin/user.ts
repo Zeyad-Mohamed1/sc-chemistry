@@ -22,6 +22,27 @@ export const getUser = async () => {
   return user;
 };
 
+export const getUserCourses = async () => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/courses`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: (await cookies()).toString(),
+      },
+    }
+  );
+
+  if (!res.ok) {
+    return JSON.parse(await res.text());
+  }
+
+  const courses = await res.json();
+
+  return courses;
+};
+
 export const deleteUser = async (id: string) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/user/${id}`,
