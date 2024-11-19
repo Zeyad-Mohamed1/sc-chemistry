@@ -1,3 +1,4 @@
+import { PhoneCall } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -62,28 +63,39 @@ const Footer = () => {
           </span>
         </Link>
 
-        <div className="flex items-center gap-2">
-          <p className="text-slate-200 text-center shrink">تواصل معنا:</p>
+        <div className="flex flex-col gap-4 justify-center items-center">
           <div className="flex items-center gap-2">
-            {links.slice(2, 4).map((link, index) => (
-              <a
-                key={index}
-                href={link.href}
-                target="_blank"
-                rel="noreferrer"
-                className="relative w-14 h-14 flex-center-both rounded-full font-h1 hover-shadow smooth undefined"
-              >
-                <span className="relative">
-                  <Image
-                    width={20}
-                    height={20}
-                    src={link.img}
-                    alt="logo"
-                    className="h-auto w-7"
-                  />
-                </span>
-              </a>
-            ))}
+            <p className="text-slate-200 text-center shrink">تواصل معنا:</p>
+            <div className="flex items-center gap-2">
+              {links.slice(2, 4).map((link, index) => (
+                <a
+                  key={index}
+                  href={link.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="relative w-14 h-14 flex-center-both rounded-full font-h1 hover-shadow smooth undefined"
+                >
+                  <span className="relative">
+                    <Image
+                      width={20}
+                      height={20}
+                      src={link.img}
+                      alt="logo"
+                      className="h-auto w-7"
+                    />
+                  </span>
+                </a>
+              ))}
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <p className="text-slate-200 text-center shrink">أو اتصل بنا:</p>
+            <div className="flex items-center gap-2 bg-slate-300 rounded-[5px] p-2">
+              <span className="text-slate-800 text-center shrink">
+                201016046701+
+              </span>
+              <PhoneCall size={20} className="text-slate-800" />
+            </div>
           </div>
         </div>
       </div>
