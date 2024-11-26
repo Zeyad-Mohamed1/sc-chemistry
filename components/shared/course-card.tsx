@@ -9,6 +9,10 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { useSelector } from "react-redux";
 import { userCourses } from "@/app/(root)/my-courses/components/my-courses";
+import { useMutation } from "@tanstack/react-query";
+import { craetePayment } from "@/actions/user/payment";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const CourseCard = ({
   image,
@@ -19,9 +23,60 @@ const CourseCard = ({
   updatedAt,
   id,
 }: Course) => {
+  const router = useRouter();
   const { user } = useSelector((state: any) => state.user);
-
   const { isLoading: coursesLoading, data: courses } = userCourses();
+
+  const {
+    mutate,
+    isPending: isPaymentLoading,
+    isSuccess: isPaymentSuccess,
+    data,
+  } = useMutation({
+    mutationKey: ["payment"],
+    mutationFn: async ({
+      email,
+      first_name,
+      last_name,
+      name,
+      phone_number,
+      course_id,
+      amount,
+    }: any) =>
+      await craetePayment({
+        email,
+        first_name,
+        last_name,
+        name,
+        phone_number,
+        course_id,
+        amount,
+      }),
+  });
+
+  console.log(data);
+
+  useEffect(() => {
+    if (isPaymentSuccess) {
+      router.push(data?.url);
+    }
+  }, [isPaymentSuccess, router, data]);
+
+  const handlePayment = () => {
+    if (user === null) {
+      router.push("/sign-in");
+    } else {
+      mutate({
+        amount: price.toString(),
+        course_id: id || "",
+        email: "zoz@gmail.com",
+        first_name: user.firstName,
+        last_name: user.lastName,
+        name,
+        phone_number: user.studentNumber,
+      });
+    }
+  };
 
   // Check if the courses are loading
   const isLoading = coursesLoading;
@@ -94,9 +149,14 @@ const CourseCard = ({
                     الدخول للكورس
                   </Button>
                 </Link>
-                <Link href={user === null ? "/sign-in" : `/course/${id}`}>
-                  <Button className="w-full rounded-full">اشترك الان</Button>
-                </Link>
+
+                <Button onClick={handlePayment} className="rounded-full">
+                  {isPaymentLoading ? (
+                    <Loader2 className="w-5 h-5 animate-spin text-white" />
+                  ) : (
+                    "اشترك الان"
+                  )}
+                </Button>
               </>
             )}
           </div>
