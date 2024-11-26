@@ -14,6 +14,8 @@ const CoursesSection = ({ name }: { name: string }) => {
     queryFn: async () => await getCourses(name),
   });
 
+  console.log(data);
+
   useEffect(() => {
     if (isLoading) {
       return () => {
@@ -34,7 +36,7 @@ const CoursesSection = ({ name }: { name: string }) => {
         <div className="w-full h-full flex items-center justify-center">
           <Loader2 className="text-primary size-10 animate-spin" />
         </div>
-      ) : data?.length === 0 ? (
+      ) : data?.length === 0 || !data || data?.statusCode === 404 ? (
         <div className="w-full h-full flex items-center justify-center py-20 border border-dashed border-gray-500">
           <span className="text-muted">لم تتم اضافة كورسات بعد لهذه السنة</span>
         </div>
