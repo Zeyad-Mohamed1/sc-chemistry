@@ -41,7 +41,8 @@ export function DropdownMenuYears() {
             {isLoading ? (
               <Loader2 className="text-primary size-5 animate-spin" />
             ) : (
-              years.map((year: Year) => (
+              Array.isArray(years) &&
+              years?.map((year: Year) => (
                 <Link
                   href={`/courses/${year.name}`}
                   key={year.id}

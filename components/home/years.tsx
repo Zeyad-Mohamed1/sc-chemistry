@@ -23,7 +23,8 @@ const Years = async () => {
               </h1>
             </div>
           ) : (
-            years.map((year: Year) => (
+            Array.isArray(years) &&
+            years?.map((year: Year) => (
               <YearCard key={year.id} name={year.name} image={year.image} />
             ))
           )}
