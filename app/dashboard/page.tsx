@@ -65,9 +65,9 @@ export default function DashboardPage() {
                 {item.description}
               </CardDescription>
               <div className="absolute bottom-4 left-4">
-                <Button asChild>
+                {/* <Button asChild>
                   <Link href={item.link}>عرض التفاصيل</Link>
-                </Button>
+                </Button> */}
               </div>
             </CardContent>
             <div className="absolute top-0 right-0 w-2 h-full bg-primary" />

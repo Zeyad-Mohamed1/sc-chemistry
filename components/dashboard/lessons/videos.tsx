@@ -47,11 +47,11 @@ export default function Videos({ id }: { id: string }) {
       await addVideo({
         id,
         name,
-        url: `${url}?autoplay=false&loop=false&muted=false&preload=metadata&responsive=true`,
+        url: `${url}`,
         description,
       }),
   });
-
+  // https://iframe.mediadelivery.net/embed/344793/b6b0d2e2-c51b-4726-8286-72b7e5376d7a?
   const upload = () => {
     mutateUpload({ name, url, description });
   };

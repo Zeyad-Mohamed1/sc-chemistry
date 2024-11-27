@@ -40,7 +40,7 @@ const Video = () => {
     // <div style={{ position: "relative", paddingTop: "56.25%" }}>
     <div className="w-full h-[500px] max-w-5xl mx-auto rounded-2xl shadow-large overflow-hidden border border-secondary-container smooth clr-text-primary relative">
       <iframe
-        src={`${video?.url}`}
+        src={video?.url || ""}
         loading="lazy"
         style={{
           border: 0,
