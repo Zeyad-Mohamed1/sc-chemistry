@@ -47,7 +47,7 @@ const SignInForm = () => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const res = await loginUser(values);
 
-    if (res.statusCode == 400 || res.statusCode == 404) {
+    if (res?.statusCode == 400 || res?.statusCode == 404) {
       Swal.fire({
         icon: "error",
         title: res.message,
@@ -57,8 +57,8 @@ const SignInForm = () => {
       Swal.fire({
         position: "center",
         icon: "success",
-        title: res.message,
-        timer: 10000,
+        title: res?.message,
+        timer: 5000,
         preConfirm: () => {
           push("/");
         },

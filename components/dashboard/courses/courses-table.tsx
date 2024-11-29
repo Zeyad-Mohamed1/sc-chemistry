@@ -149,9 +149,9 @@ export default function CoursesTable() {
           <div className="w-full h-screen flex items-center justify-center">
             <Loader2 className="w-10 h-10 animate-spin" />
           </div>
-        ) : data === null ? (
+        ) : data === null || data?.length === 0 || data?.statusCode === 404 ? (
           <div className="w-full h-screen flex items-center justify-center">
-            لا يوجد كورسات متوفرة
+            لا يوجد كورسات متوفرة لهذا الصف
           </div>
         ) : (
           <Table dir="rtl" className="border rounded-[12px]">

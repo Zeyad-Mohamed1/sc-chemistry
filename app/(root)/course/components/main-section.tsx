@@ -5,10 +5,19 @@ import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import { getCourse } from "./bg-course";
 import { userCourses } from "../../my-courses/components/my-courses";
+import { useMutation } from "@tanstack/react-query";
+import { useEffect } from "react";
+import { craetePayment } from "@/actions/user/payment";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 
 const MainSection = () => {
+  const router = useRouter();
+  const { user } = useSelector((state: any) => state.user);
   const { isLoading: courseLoading, data } = getCourse();
   const { isLoading: coursesLoading, data: courses } = userCourses();
+
+  console.log(data);
 
   // Check if the courses are loading
   const isLoading = courseLoading || coursesLoading;
@@ -18,6 +27,56 @@ const MainSection = () => {
     courses.some((course: any) => course.id === data?.id);
 
   // If still loading, show a loader
+
+  const {
+    mutate,
+    isPending: isPaymentLoading,
+    isSuccess: isPaymentSuccess,
+    data: dataPayment,
+  } = useMutation({
+    mutationKey: ["payment"],
+    mutationFn: async ({
+      email,
+      first_name,
+      last_name,
+      name,
+      phone_number,
+      course_id,
+      amount,
+    }: any) =>
+      await craetePayment({
+        email,
+        first_name,
+        last_name,
+        name,
+        phone_number,
+        course_id,
+        amount,
+      }),
+  });
+
+  useEffect(() => {
+    if (isPaymentSuccess) {
+      router.push(dataPayment?.url);
+    }
+  }, [isPaymentSuccess, router, dataPayment]);
+
+  const handlePayment = () => {
+    if (user === null) {
+      router.push("/sign-in");
+    } else {
+      mutate({
+        amount: data?.price.toString(),
+        course_id: data?.id || "",
+        email: "zoz@gmail.com",
+        first_name: user.firstName,
+        last_name: user.lastName,
+        name: data?.name,
+        phone_number: user.studentNumber,
+      });
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -49,11 +108,20 @@ const MainSection = () => {
                     </div>
                   )}
 
-                  <button className="border-2 smooth false w-full inline-block text-center bg-secondary border-secondary hover:bg-opacity-0 dark:hover:bg-opacity-0 bg-opacity-100 hover:text-white/80 text-white rounded-[.375rem] px-4 py-2 ">
+                  <button
+                    onClick={handlePayment}
+                    className="border-2 smooth false w-full inline-block text-center bg-secondary border-secondary hover:bg-opacity-0 dark:hover:bg-opacity-0 bg-opacity-100 hover:text-white/80 text-white rounded-[.375rem] px-4 py-2 "
+                  >
                     {courseLoading ? (
                       <Loader2 className="w-10 h-10 animate-spin text-white" />
                     ) : (
-                      <span className="">اشترك الان</span>
+                      <span className="">
+                        {isPaymentLoading ? (
+                          <Loader2 className="size-4 animate-spin text-white" />
+                        ) : (
+                          "اشتري الان"
+                        )}
+                      </span>
                     )}
                   </button>
                   <div className="text-slate-500 flex items-center gap-2 justify-center">

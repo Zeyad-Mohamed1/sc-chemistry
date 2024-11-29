@@ -14,8 +14,6 @@ const CoursesSection = ({ name }: { name: string }) => {
     queryFn: async () => await getCourses(name),
   });
 
-  console.log(data);
-
   useEffect(() => {
     if (isLoading) {
       return () => {

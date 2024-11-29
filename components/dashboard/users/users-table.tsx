@@ -38,6 +38,8 @@ import { User, Year } from "@/utils/types";
 import { getYears } from "@/actions/admin/year";
 import Swal from "sweetalert2";
 import { useEffect } from "react";
+import ChangePassword from "./change-password";
+import CourseManagementDialog from "./course-management";
 
 export default function UsersTable() {
   const searchParams = useSearchParams();
@@ -130,7 +132,8 @@ export default function UsersTable() {
               <SelectItem value="all">ازالة الفلترة</SelectItem>
               {years === null
                 ? null
-                : years?.map((year: Year) => (
+                : Array.isArray(years) &&
+                  years?.map((year: Year) => (
                     <SelectItem key={year.id} value={year.name}>
                       {year.name}
                     </SelectItem>
@@ -185,39 +188,44 @@ export default function UsersTable() {
                   <TableCell>{user.parentNumber}</TableCell>
                   <TableCell>{user.governorate}</TableCell>
                   <TableCell>{user.yearOfStudy}</TableCell>
-                  <TableCell className="w-[1%] whitespace-nowrap">
-                    <AlertDialog>
-                      <AlertDialogTrigger asChild>
-                        <Button
-                          variant="destructive"
-                          size="icon"
-                          className="h-8 w-8"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
-                      </AlertDialogTrigger>
-                      <AlertDialogContent>
-                        <AlertDialogHeader>
-                          <AlertDialogTitle>
-                            هل أنت متأكد من حذف {user.firstName}؟
-                          </AlertDialogTitle>
-                          <AlertDialogDescription>
-                            هذا الإجراء لا يمكن التراجع عنه. سيتم حذف المستخدم
-                            نهائياً من النظام.
-                          </AlertDialogDescription>
-                        </AlertDialogHeader>
-                        <AlertDialogFooter>
-                          <AlertDialogCancel>إلغاء</AlertDialogCancel>
-                          <AlertDialogAction
-                            onClick={() => {
-                              deleteUsers(user.id);
-                            }}
+
+                  <TableCell className="">
+                    <div className="flex items-center gap-2">
+                      <CourseManagementDialog id={user.id} />
+                      <ChangePassword id={user.id} />
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button
+                            variant="destructive"
+                            size="icon"
+                            className="h-8 w-8"
                           >
-                            تأكيد الحذف
-                          </AlertDialogAction>
-                        </AlertDialogFooter>
-                      </AlertDialogContent>
-                    </AlertDialog>
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>
+                              هل أنت متأكد من حذف {user.firstName}؟
+                            </AlertDialogTitle>
+                            <AlertDialogDescription>
+                              هذا الإجراء لا يمكن التراجع عنه. سيتم حذف المستخدم
+                              نهائياً من النظام.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>إلغاء</AlertDialogCancel>
+                            <AlertDialogAction
+                              onClick={() => {
+                                deleteUsers(user.id);
+                              }}
+                            >
+                              تأكيد الحذف
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}

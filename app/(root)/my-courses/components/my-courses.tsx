@@ -36,25 +36,34 @@ const MyCourses = () => {
         showConfirmButton: false,
         timer: 1500,
       });
+
       router.push("/sign-in");
     }
   }, [data, router, user]);
 
   return (
-    <>
+    <div>
       {isLoading ? (
         <div className="w-full h-full flex items-center justify-center">
           <Loader2 className="text-primary size-10 animate-spin" />
         </div>
       ) : (
-        <div className="smooth bg-opacity-50 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-10">
-          {Array.isArray(data) &&
-            data?.map((course: Course) => (
-              <CourseCard key={course.id} {...course} />
-            ))}
-        </div>
+        <>
+          {!data || data?.length === 0 || data?.statusCode === 404 ? (
+            <div className="text-muted text-center py-20 border border-dashed w-full border-gray-500">
+              لا يوجد كورسات
+            </div>
+          ) : (
+            <div className="smooth bg-opacity-50 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-10">
+              {Array.isArray(data) &&
+                data?.map((course: Course) => (
+                  <CourseCard key={course.id} {...course} />
+                ))}
+            </div>
+          )}
+        </>
       )}
-    </>
+    </div>
   );
 };
 

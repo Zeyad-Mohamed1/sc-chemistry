@@ -21,7 +21,6 @@ const LessonCard = ({
   courseId,
 }: Lesson) => {
   const { user } = useSelector((state: any) => state.user);
-  console.log(user);
 
   const { isLoading: coursesLoading, data: courses } = userCourses();
 

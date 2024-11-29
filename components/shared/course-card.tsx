@@ -54,8 +54,6 @@ const CourseCard = ({
       }),
   });
 
-  console.log(data);
-
   useEffect(() => {
     if (isPaymentSuccess) {
       router.push(data?.url);

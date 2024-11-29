@@ -36,13 +36,13 @@ import { cn } from "@/lib/utils";
 
 const items = [
   { title: "المستخدمين", icon: Users, url: "/dashboard/users" },
-  { title: "الكورسات", icon: Book, url: "/dashboard/courses", add: "كورس" },
   {
     title: "الصفوف الدراسية",
     icon: Calendar,
     url: "/dashboard/years",
     add: "سنة",
   },
+  { title: "الكورسات", icon: Book, url: "/dashboard/courses", add: "كورس" },
   {
     title: "الدروس",
     icon: GraduationCap,

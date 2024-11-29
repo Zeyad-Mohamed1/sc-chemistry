@@ -34,6 +34,18 @@ const adminMenu = [
     icon: <Shield />,
   },
 ];
+
+function getCookie(name: string) {
+  const value = `; ${document.cookie}`;
+  const parts: string[] = (value as string).split(`; ${name}=`);
+  if (parts.length === 2)
+    return ((parts?.pop() ?? []) as string).split(";").shift();
+}
+
+function deleteCookie(name: string) {
+  document.cookie = `${name}=; Max-Age=0; path=/;`;
+}
+
 const Header = ({ cuurentUser }: { cuurentUser: any }) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { user } = useSelector((state: any) => state.user);
@@ -45,10 +57,12 @@ const Header = ({ cuurentUser }: { cuurentUser: any }) => {
     const res = await logoutUser();
   };
 
+  const cookie = getCookie("token");
+
   const dispatch = useDispatch();
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { isAdmin: admin, ...rest } = cuurentUser || {};
+  const { isAdmin: admin, token, ...rest } = cuurentUser || {};
 
   useEffect(() => {
     if (cuurentUser === null) {
@@ -57,6 +71,12 @@ const Header = ({ cuurentUser }: { cuurentUser: any }) => {
       dispatch(setUser(rest));
     }
   }, [cuurentUser, dispatch]);
+
+  useEffect(() => {
+    if (cookie && cookie !== cuurentUser?.token) {
+      deleteCookie("token");
+    }
+  }, [cookie, cuurentUser]);
 
   return (
     <header className="w-full z-[9999] sticky top-0 bg-white">

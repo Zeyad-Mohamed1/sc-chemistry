@@ -10,7 +10,7 @@ export const registerUser = async (user: RegisterUserDto) => {
       await createServerAxiosInstance()
     ).post("/auth/register", user);
 
-    return res.data;
+    return res?.data;
   } catch (error) {
     return error;
   }
@@ -18,11 +18,26 @@ export const registerUser = async (user: RegisterUserDto) => {
 
 export const loginUser = async (user: LoginUserDto) => {
   try {
-    const res = await (
-      await createServerAxiosInstance()
-    ).post("/auth/login", user, {
-      withCredentials: true,
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          studentNumber: user.studentNumber,
+          password: user.password,
+        }),
+        next: { tags: ["user"] },
+      }
+    );
+
+    if (!res.ok) {
+      return JSON.parse(await res.text());
+    }
+
+    const data = await res.json();
 
     const cookie = (await cookies()).get("token");
 
@@ -32,15 +47,15 @@ export const loginUser = async (user: LoginUserDto) => {
 
     (await cookies()).set({
       name: "token",
-      value: res.data.token,
+      value: data?.token,
     });
 
     revalidateTag("user");
 
-    return res.data;
+    return data;
   } catch (error) {
     // @ts-expect-error aaa
-    return error?.response.data;
+    return error?.response?.data;
   }
 };
 
