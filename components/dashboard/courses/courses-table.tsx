@@ -50,7 +50,7 @@ export default function CoursesTable() {
   const [yeardId, setYearId] = useState("");
 
   useEffect(() => {
-    if (!isLoadingYears && years && years.length > 0) {
+    if (!isLoadingYears && years && years?.length > 0) {
       setYearId(years[0]?.id);
     }
   }, [isLoadingYears, years]);

@@ -17,7 +17,7 @@ const Details = () => {
 
   const videoId =
     searchParams.get("videoId") ||
-    (data?.video && data.video.length > 0 ? data.video[0].id : undefined);
+    (data?.video && data.video?.length > 0 ? data.video[0].id : undefined);
 
   useEffect(() => {
     // Check if data is still loading

@@ -31,7 +31,7 @@ const Title = () => {
 
   const videoId =
     searchParams.get("videoId") ||
-    (data?.video && data?.video.length > 0 ? data?.video[0].id : undefined);
+    (data?.video && data?.video?.length > 0 ? data?.video[0].id : undefined);
 
   useEffect(() => {
     // Wait until data is loaded
