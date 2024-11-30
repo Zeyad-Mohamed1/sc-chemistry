@@ -123,6 +123,10 @@ export default function LessonsTable() {
     }
   }, [successActive, courseUpdated]);
 
+  if (isLoading || isLoadingLessons || isLoadingYears) {
+    return <Loader2 className="w-6 h-6 animate-spin" />;
+  }
+
   return (
     <div className="container mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6 text-right">جدول الدروس</h1>

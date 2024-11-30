@@ -100,6 +100,14 @@ export default function YearsTable() {
     }
   }, [isSuccess, message]);
 
+  if (isLoading) {
+    return (
+      <div className="w-full h-screen flex items-center justify-center">
+        <Loader2 className="w-10 h-10 animate-spin" />
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto p-6">
       <div className="w-full flex items-center justify-between">
@@ -120,7 +128,7 @@ export default function YearsTable() {
           </div>
         ) : data === null || data === undefined ? (
           <div className="w-full h-screen flex items-center justify-center">
-            لا يوجد مستخدمين
+            لم يتم اضافة سنوات دراسية بعد
           </div>
         ) : (
           <Table dir="rtl" className="border rounded-[12px]">

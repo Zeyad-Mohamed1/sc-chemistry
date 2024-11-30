@@ -110,6 +110,17 @@ export default function UsersTable() {
     }
   }, [isSuccess, deleteData]);
 
+  if (isLoading || isLoadingYears) {
+    return (
+      <div className="container mx-auto p-6">
+        <h1 className="text-3xl font-bold mb-6 text-right">جدول المستخدمين</h1>
+        <div className="flex items-center justify-center h-[50vh]">
+          <Loader2 className="w-6 h-6 animate-spin" />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6 text-right">جدول المستخدمين</h1>
