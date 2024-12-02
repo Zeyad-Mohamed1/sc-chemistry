@@ -50,7 +50,7 @@ const Title = () => {
       Array.isArray(courses) &&
       courses.some((course: any) => course.id === data?.courseId);
 
-    if (!exists || !data?.isFree) {
+    if (!exists && !data?.isFree) {
       router.push("/");
     }
   }, [courses, data, router, user, isLoading, coursesLoading]);
