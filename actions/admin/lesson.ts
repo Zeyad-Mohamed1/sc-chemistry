@@ -243,6 +243,62 @@ export const getVideos = async (id: string) => {
   return videos;
 };
 
+export const getSingleVideo = async (id: string) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/lesson/video/${id}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: (await cookies()).toString(),
+      },
+    }
+  );
+
+  if (!res.ok) {
+    return JSON.parse(await res.text());
+  }
+
+  const video = await res.json();
+
+  return video;
+};
+
+export const updateVideo = async ({
+  id,
+  name,
+  url,
+  description,
+}: {
+  id: string;
+  name: string;
+  url: string;
+  description: string;
+}) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/lesson/video/${id}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: (await cookies()).toString(),
+      },
+      body: JSON.stringify({
+        name,
+        url,
+        description,
+      }),
+    }
+  );
+
+  if (!res.ok) {
+    return JSON.parse(await res.text());
+  }
+
+  const updatedVideo = await res.json();
+  return updatedVideo;
+};
+
 export const deleteVideo = async (id: string) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/videos/${id}`,

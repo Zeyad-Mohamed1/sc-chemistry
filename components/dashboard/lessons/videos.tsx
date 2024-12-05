@@ -18,6 +18,7 @@ import { addVideo, deleteVideo, getVideos } from "@/actions/admin/lesson";
 import Swal from "sweetalert2";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import UpdateVideo from "./update-video";
 
 export default function Videos({ id }: { id: string }) {
   const [name, setName] = useState("");
@@ -51,7 +52,6 @@ export default function Videos({ id }: { id: string }) {
         description,
       }),
   });
-  // https://iframe.mediadelivery.net/embed/344793/b6b0d2e2-c51b-4726-8286-72b7e5376d7a?
   const upload = () => {
     mutateUpload({ name, url, description });
   };
@@ -162,23 +162,26 @@ export default function Videos({ id }: { id: string }) {
                             <span className="text-lg font-medium">
                               {video?.name}
                             </span>
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              onClick={() => handleDelete(video?.id)}
-                              className="text-red-500 hover:bg-red-100 hover:text-red-600"
-                            >
-                              {deleteLoading ? (
-                                <Loader2 className="h-4 w-4 animate-spin" />
-                              ) : (
-                                <>
-                                  <Trash2 className="h-4 w-4" />
-                                  <span className="sr-only">
-                                    حذف {data?.name}
-                                  </span>
-                                </>
-                              )}
-                            </Button>
+                            <div className="flex items-center gap-2">
+                              <UpdateVideo id={video?.id} refetch={refetch} />
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                onClick={() => handleDelete(video?.id)}
+                                className="text-red-500 hover:bg-red-100 hover:text-red-600"
+                              >
+                                {deleteLoading ? (
+                                  <Loader2 className="h-4 w-4 animate-spin" />
+                                ) : (
+                                  <>
+                                    <Trash2 className="h-4 w-4" />
+                                    <span className="sr-only">
+                                      حذف {data?.name}
+                                    </span>
+                                  </>
+                                )}
+                              </Button>
+                            </div>
                           </div>
                         </CardContent>
                       </Card>
