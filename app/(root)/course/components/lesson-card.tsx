@@ -6,9 +6,9 @@ import { format } from "date-fns";
 import { ar } from "date-fns/locale";
 import { FolderSync, Loader2, SquarePlus } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { userCourses } from "../../my-courses/components/my-courses";
 import { useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 
 const LessonCard = ({
   name,
@@ -20,6 +20,7 @@ const LessonCard = ({
   isFree,
   courseId,
 }: Lesson) => {
+  const router = useRouter();
   const { user } = useSelector((state: any) => state.user);
 
   const { isLoading: coursesLoading, data: courses } = userCourses();
@@ -40,6 +41,13 @@ const LessonCard = ({
       </div>
     );
   }
+
+  const handlePush = () => {
+    if (user === null) {
+      router.push("/sign-in");
+    }
+    router.push(`/course/${courseId}/lesson/${id}`);
+  };
 
   return (
     <>
@@ -81,15 +89,13 @@ const LessonCard = ({
             </div>
           </div>
           <div className="mt-5">
-            <Link
-              href={
-                user === null ? "/sign-in" : `/course/${courseId}/lesson/${id}`
-              }
+            <Button
+              onClick={handlePush}
+              disabled={!exists && !isFree}
+              className="w-full"
             >
-              <Button disabled={!exists && !isFree} className="w-full">
-                {exists || isFree ? "الدخول للدرس" : "يجب شراء الكورس اولا"}
-              </Button>
-            </Link>
+              {exists || isFree ? "الدخول للدرس" : "يجب شراء الكورس اولا"}
+            </Button>
           </div>
         </div>
       </div>
