@@ -81,7 +81,7 @@ const EditLesson = ({ id, refetch }: { id: string; refetch: () => void }) => {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] space-y-4">
         <DialogHeader>
-          <DialogTitle>تعديل الدرس</DialogTitle>
+          <DialogTitle>تعديل المحاضرة</DialogTitle>
         </DialogHeader>
         {isLoading ? (
           <div className="text-center">
@@ -93,7 +93,7 @@ const EditLesson = ({ id, refetch }: { id: string; refetch: () => void }) => {
               <Label htmlFor="name">اسم الكورس</Label>
               <Input
                 id="name"
-                placeholder="اسم الدرس"
+                placeholder="اسم المحاضرة"
                 defaultValue={name}
                 onChange={(e) => setName(e.target.value)}
                 required
@@ -103,7 +103,7 @@ const EditLesson = ({ id, refetch }: { id: string; refetch: () => void }) => {
               <Label htmlFor="description">الوصف</Label>
               <Textarea
                 id="description"
-                placeholder="وصف الدرس"
+                placeholder="وصف المحاضرة"
                 defaultValue={description}
                 onChange={(e) => setDescription(e.target.value)}
                 required

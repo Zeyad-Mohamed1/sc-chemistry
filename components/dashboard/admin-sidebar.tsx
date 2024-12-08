@@ -44,10 +44,10 @@ const items = [
   },
   { title: "الكورسات", icon: Book, url: "/dashboard/courses", add: "كورس" },
   {
-    title: "الدروس",
+    title: "المحاضرات",
     icon: GraduationCap,
     url: "/dashboard/lessons",
-    add: "درس",
+    add: "محاضرة",
   },
 ];
 

@@ -94,7 +94,7 @@ const LessonCard = ({
               disabled={!exists && !isFree}
               className="w-full"
             >
-              {exists || isFree ? "الدخول للدرس" : "يجب شراء الكورس اولا"}
+              {exists || isFree ? "الدخول للمحاضرة" : "يجب شراء الكورس اولا"}
             </Button>
           </div>
         </div>

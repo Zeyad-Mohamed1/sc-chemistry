@@ -129,7 +129,7 @@ export default function LessonsTable() {
 
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6 text-right">جدول الدروس</h1>
+      <h1 className="text-3xl font-bold mb-6 text-right">جدول المحاضرات</h1>
       <div className="mb-4 flex gap-2 items-center">
         {isLoadingYears ? (
           <Loader2 className="w-6 h-6 animate-spin" />
@@ -197,7 +197,7 @@ export default function LessonsTable() {
                   <TableHead key={column} className="text-right cursor-pointer">
                     {column === "name" && "الاسم"}
                     {column === "description" && "الوصف"}
-                    {column === "status" && "الحالة"}
+                    {column === "status" && "متاح للجميع"}
                   </TableHead>
                 ))}
                 <TableHead className="text-right">الملفات</TableHead>
@@ -216,7 +216,7 @@ export default function LessonsTable() {
                     <TableCell>
                       <Switch
                         onCheckedChange={() => updateActive(lesson.id || "")}
-                        defaultChecked={lesson.isFree}
+                        defaultChecked={lesson?.isFree}
                       />
                     </TableCell>
                     <TableCell>

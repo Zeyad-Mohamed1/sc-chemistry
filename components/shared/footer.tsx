@@ -16,7 +16,7 @@ const links = [
     img: "/gmail.png",
   },
   {
-    href: "https://t.me/RandomName205",
+    href: "https://t.me/salwachemistry",
     img: "/telegram.png",
   },
 ];
@@ -54,7 +54,7 @@ const Footer = () => {
           </a>
         ))}
       </div>
-      <div className="h-1 bg-slate-800 rounded-md w-2/3 sm:w-1/3 "></div>
+      <div className="h-1 bg-slate-800 rounded-md w-2/3 sm:w-1/3"></div>
 
       <div className="flex flex-col justify-center items-center gap-5">
         <Link href="/terms-and-conditions">
@@ -92,7 +92,7 @@ const Footer = () => {
             <p className="text-slate-200 text-center shrink">أو اتصل بنا:</p>
             <div className="flex items-center gap-2 bg-slate-300 rounded-[5px] p-2">
               <span className="text-slate-800 text-center shrink">
-                201016046701+
+                201223528957+
               </span>
               <PhoneCall size={20} className="text-slate-800" />
             </div>

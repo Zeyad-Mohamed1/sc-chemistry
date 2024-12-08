@@ -33,7 +33,7 @@ const LessonSection = () => {
           {data?.lessons.length === 0 && (
             <div className="w-full h-full flex items-center justify-center py-20 border border-dashed border-gray-500">
               <span className="text-muted">
-                لم تتم اضافة دروس بعد لهذا الكورس
+                لم تتم اضافة محاضرات بعد لهذا الكورس
               </span>
             </div>
           )}

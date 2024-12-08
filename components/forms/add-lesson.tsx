@@ -88,7 +88,7 @@ export default function AddLesson() {
       Swal.fire({
         position: "center",
         icon: "success",
-        title: "تم اضافة الدرس بنجاح",
+        title: "تم اضافة المحاضرة بنجاح",
         timer: 2000,
         showConfirmButton: false,
       });
@@ -103,15 +103,15 @@ export default function AddLesson() {
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader>
-        <CardTitle className="text-center">اضافة درس</CardTitle>
+        <CardTitle className="text-center">اضافة محاضرة</CardTitle>
       </CardHeader>
       <div>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="name">اسم الدرس</Label>
+            <Label htmlFor="name">اسم المحاضرة</Label>
             <Input
               id="name"
-              placeholder="اسم الدرس"
+              placeholder="اسم المحاضرة"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
@@ -121,7 +121,7 @@ export default function AddLesson() {
             <Label htmlFor="description">الوصف</Label>
             <Textarea
               id="description"
-              placeholder="وصف الدرس"
+              placeholder="وصف المحاضرة"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               required
@@ -200,7 +200,7 @@ export default function AddLesson() {
             onClick={handleSubmit}
             className="w-full"
           >
-            اضافة الدرس
+            اضافة المحاضرة
           </Button>
         </CardFooter>
       </div>

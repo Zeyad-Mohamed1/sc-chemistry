@@ -48,9 +48,9 @@ const Main = () => {
       link: "/dashboard/years",
     },
     {
-      title: "الدروس",
+      title: "المحاضرات",
       icon: GraduationCap,
-      description: "إدارة الدروس والمحاضرات",
+      description: "إدارة المحاضرات",
       count: isLoading ? 0 : data?.totalLessons,
       link: "/dashboard/lessons",
     },

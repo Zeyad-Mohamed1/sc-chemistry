@@ -26,7 +26,7 @@ const Video = () => {
   if (!video || !video.url) {
     return (
       <div className="w-full h-[500px] flex items-center justify-center border border-gray-500 border-dashed">
-        <span className="text-muted text-3xl">لم يتم اضافة دروس بعد</span>
+        <span className="text-muted text-3xl">لم يتم اضافة محاضرات بعد</span>
       </div>
     );
   }

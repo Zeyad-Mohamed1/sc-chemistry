@@ -58,7 +58,7 @@ const Privacy = () => {
         </div>
         <div className="font-bold font-h1">سياسة الاسترجاع</div>
         <div className="space-y-4 flex flex-col">
-          <span>لا يوجد استرجاع والا في حالات استثنائية</span>
+          <span>لا يوجد استرجاع إلا في حالات استثنائية</span>
         </div>
       </div>
     </div>
