@@ -148,10 +148,7 @@ const CourseCard = ({
                   </Button>
                 </Link>
 
-                <Button
-                  onClick={handlePayment}
-                  className="rounded-full bg-green-800"
-                >
+                <Button onClick={handlePayment} className="rounded-full">
                   {isPaymentLoading ? (
                     <Loader2 className="w-5 h-5 animate-spin text-white" />
                   ) : (

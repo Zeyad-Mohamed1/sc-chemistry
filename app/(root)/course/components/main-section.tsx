@@ -110,7 +110,7 @@ const MainSection = () => {
 
                   <button
                     onClick={handlePayment}
-                    className="border-2 smooth false w-full inline-block text-center bg-secondary border-secondary hover:bg-opacity-0 dark:hover:bg-opacity-0 bg-opacity-100 hover:text-white/80 text-white rounded-[.375rem] px-4 py-2 "
+                    className="border-2 smooth false w-full inline-block text-center bg-green-700 border-secondary hover:bg-opacity-0 dark:hover:bg-opacity-0 bg-opacity-100 hover:text-white/80 text-white rounded-[.375rem] px-4 py-2 "
                   >
                     {courseLoading ? (
                       <Loader2 className="w-10 h-10 animate-spin text-white" />
