@@ -40,7 +40,7 @@ const Hero = () => {
         >
           <div className="flex flex-1 w-full flex-col gap-5 items-center text-right">
             <div className="font-extrabold text-5xl lg:text-6xl flex items-center flex-row-reverse gap-2">
-              <p className="text-primary text">سلوي عبد العزيز</p>
+              <p className="text-primary text">سلوي عبد العزيز zoz</p>
               <p className="text-muted"> أ .</p>
             </div>
 
